@@ -24,7 +24,7 @@ public class AdminController {
 	@Autowired
 	public AdminService aservice;
 	
-	@PostMapping("/admin")
+	@PostMapping("/create")
 	public ResponseEntity<Admin> add(@RequestBody AdminDto adminDto){
 		
 		System.out.println(adminDto);

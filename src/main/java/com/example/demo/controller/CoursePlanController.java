@@ -48,10 +48,10 @@ public class CoursePlanController {
 	}
 	
 	
-	@GetMapping("/view/{planid}")
-	public ResponseEntity<CoursePlan> getById(@PathVariable Integer planid){
+	@GetMapping("/view/{batchid}")
+	public ResponseEntity<List<CoursePlan>> getById(@PathVariable Integer batchid){
 		
-		CoursePlan courseplan = cpService.getById(planid);
+		List<CoursePlan> courseplan = cpService.getById(batchid);
 		
 		return new ResponseEntity<>(courseplan,HttpStatus.OK);
 	
@@ -60,6 +60,7 @@ public class CoursePlanController {
 	@PutMapping("/update/{batchid}")
 	public ResponseEntity<CoursePlan> update(@PathVariable Integer batchid,@RequestBody CoursePlanDto coursePlanDto){
 		
+//		System.out.println(batchid + " " + coursePlanDto);
 		CoursePlan courseplan = cpService.update(batchid,coursePlanDto);
 		
 		return new ResponseEntity<>(courseplan,HttpStatus.OK);
