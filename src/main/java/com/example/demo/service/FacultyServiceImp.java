@@ -42,10 +42,13 @@ public class FacultyServiceImp implements FacultyService{
 		return facultyrepo.findById(facultyid).orElseThrow( () -> new CourseException("There is no faculty with this id") );
 	}
 
+	
 	@Override
 	public Faculty update(Integer facultyid, FacultyDto facultydto) {
 		
-		Faculty faculty = new Faculty();
+		Faculty faculty = facultyrepo.findById(facultyid)
+	            .orElseThrow(() -> new CourseException("Faculty not found with ID: " + facultyid));
+
 		
 		if(facultydto.getEmail() != null) {
 		faculty.setEmail(facultydto.getEmail());

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,31 +54,38 @@ public class CoursePlanServiceImp implements CoursePlanService{
 	
 	
 	@Override
-	public CoursePlan getById(Integer batchid) {
-		// TODO Auto-generated method stub
-		return cprepo.findById(batchid).orElseThrow( () -> new CourseException("There is no courseplan with this id") );
+	public List<CoursePlan> getById(Integer batchid) {
+		
+		Optional<Batch> batchop = brepo.findById(batchid);
+		Batch batch = batchop.orElseThrow(() -> new CourseException("batch not found:"+batchid));
+		
+		List<CoursePlan> courseplan = cprepo.findByBatch(batch);
+	
+		if (courseplan.isEmpty()) {
+            throw new CourseException("No course plans found for batch ID: " + batchid);
+        }
+        
+        return courseplan;
 	}
-
 
 
 	@Override
 	public CoursePlan update(Integer planid, CoursePlanDto coursePlanDto) {
 		
-		CoursePlan cp = new CoursePlan();
-		
-		if(cp.getBatch() != null) {
-			 Batch b = brepo.findById(coursePlanDto.getBatchid()).orElseThrow(() -> new CourseException("There is not batch with this id "+ coursePlanDto.getBatchid()));
-			    cp.setBatch(b);
-		}
-		if(cp.getDaynumber() != null) {
-			cp.setDaynumber(coursePlanDto.getDaynumber());
-		}
-		if(cp.getStatus() != null) {
-			cp.setStatus(coursePlanDto.getStatus());
-		}
-		if(cp.getTopic() != null) {
-			cp.setTopic(coursePlanDto.getTopic());
-		}
-		return cprepo.save(cp);
+		 CoursePlan cp = cprepo.findById(planid)
+		            .orElseThrow(() -> new CourseException("Course plan not found with ID: " + planid));
+
+		    // Update fields only if provided
+		    if (coursePlanDto.getDaynumber() != null) {
+		        cp.setDaynumber(coursePlanDto.getDaynumber());
+		    }
+		    if (coursePlanDto.getStatus() != null) {
+		        cp.setStatus(coursePlanDto.getStatus());
+		    }
+		    if (coursePlanDto.getTopic() != null) {
+		        cp.setTopic(coursePlanDto.getTopic());
+		    }
+
+		    return cprepo.save(cp);
 	}
 }

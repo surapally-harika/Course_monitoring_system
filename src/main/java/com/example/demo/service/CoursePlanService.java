@@ -11,7 +11,7 @@ public interface CoursePlanService {
 	
 	public List<CoursePlan> AllCourseplan();
 	
-	public CoursePlan getById(Integer batchid);
+	public List<CoursePlan> getById(Integer batchid);
 
 	public CoursePlan update(Integer planid,CoursePlanDto coursePlanDto);
 }
