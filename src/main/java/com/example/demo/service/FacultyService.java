@@ -11,5 +11,9 @@ public interface FacultyService {
 	public Faculty create(FacultyDto facultydto);
 	
 	public List<Faculty> AllFaculty();
+	
+	public Faculty getById(Integer facultyid);
+	
+	public Faculty update(Integer facultyid,FacultyDto facultydto);
 
 }
