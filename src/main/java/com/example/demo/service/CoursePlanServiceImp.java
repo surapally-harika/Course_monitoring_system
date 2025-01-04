@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.CoursePlanDto;
 import com.example.demo.exceptions.CourseException;
 import com.example.demo.model.Batch;
-import com.example.demo.model.Course;
 import com.example.demo.model.CoursePlan;
-import com.example.demo.model.Faculty;
 import com.example.demo.repo.BatchRepo;
 import com.example.demo.repo.CoursePlanRepo;
 

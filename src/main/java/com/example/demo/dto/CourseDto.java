@@ -1,61 +1,25 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CourseDto {
 
-public String coursename;
+	@NotNull(message = "name should not be null")
+	@NotBlank(message = "name should not be blank")
+	@NotEmpty(message = "name should not ne empty")
+	public String coursename;
 	
 	public Integer fee;
 	
 	public String description;
-	
-	
-	public CourseDto() {
-		
-	}
-
-
-	public CourseDto(String coursename, Integer fee, String description) {
-		super();
-		this.coursename = coursename;
-		this.fee = fee;
-		this.description = description;
-	}
-
-
-	public String getCoursename() {
-		return coursename;
-	}
-
-
-	public void setCoursename(String coursename) {
-		this.coursename = coursename;
-	}
-
-
-	public Integer getFee() {
-		return fee;
-	}
-
-
-	public void setFee(Integer fee) {
-		this.fee = fee;
-	}
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-	@Override
-	public String toString() {
-		return "CourseDto [coursename=" + coursename + ", fee=" + fee + ", description=" + description + "]";
-	}
 	
 	
 }

@@ -39,7 +39,7 @@ public class BatchServiceImp implements BatchService {
 		    
 		    Course c =   cRepo.findById(batchdto.getCourseId()).orElseThrow(() -> new CourseException("There in no course with this id "+ batchdto.getCourseId()));
 		
-		    Faculty f = fRepo.findById(batchdto.getFacultyId()).orElseThrow(() -> new CourseException("There is not faculty with this id "+ batchdto.getFacultyId()));
+		    Faculty f = fRepo.findById(batchdto.getFacultyId()).orElseThrow(() -> new CourseException("There is no faculty with this id "+ batchdto.getFacultyId()));
 	
 		  
 		    batch.setFaculty(f);
@@ -89,5 +89,32 @@ public class BatchServiceImp implements BatchService {
 		}
 		return batchrepo.save(batch);	
 	}
+
+	@Override
+	public Batch delete(Integer batchid) {
+		 
+		Batch b = getById(batchid);
+		batchrepo.save(b);
+		return b;
+	}
+
+	@Override
+	public List<Batch> getBatchByFaculty(Integer facultyid) {
+		Faculty faculty = fRepo.findById(facultyid)
+                .orElseThrow(() -> new CourseException("Faculty not found with ID: " + facultyid));
+        return batchrepo.findByFaculty(faculty);
+	}
+
+	@Override
+	public Batch getBatchForFaculty(Integer batchid, Faculty faculty) {
+		
+		Batch batch = batchrepo.findByBatchidAndFaculty(batchid, faculty);
+        if (batch == null) {
+            throw new CourseException("Batch not found for the given Faculty and Batch ID");
+        }
+        return batch;
+    }
+
+	
 
 }

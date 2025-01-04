@@ -31,7 +31,7 @@ public class Batch {
 	public String date;
 	
 	public String duration;
-	
+
 	
 	
 }

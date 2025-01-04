@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,10 +19,10 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer id;
 	
+	@Column(unique = true)
 	public String username;
 	
 	public String password;
 	
 	
-
 }

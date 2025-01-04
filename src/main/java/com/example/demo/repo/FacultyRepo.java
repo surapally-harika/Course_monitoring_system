@@ -6,4 +6,8 @@ import com.example.demo.model.Faculty;
 
 public interface FacultyRepo  extends JpaRepository<Faculty, Integer>{
 
+	public Faculty findByEmail(String email);
+
+	
+	
 }
